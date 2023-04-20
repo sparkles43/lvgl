@@ -179,11 +179,11 @@ void lv_obj_set_parent(lv_obj_t * obj, lv_obj_t * parent)
     lv_obj_readjust_scroll(old_parent, LV_ANIM_OFF);
     lv_obj_scrollbar_invalidate(old_parent);
     lv_obj_send_event(old_parent, LV_EVENT_CHILD_CHANGED, obj);
-    lv_obj_send_event(old_parent, LV_EVENT_CHILD_DELETED, NULL);
+    lv_obj_send_event(old_parent, LV_EVENT_CHILD_DELETED, obj);
 
     /*Notify the new parent about the child*/
     lv_obj_send_event(parent, LV_EVENT_CHILD_CHANGED, obj);
-    lv_obj_send_event(parent, LV_EVENT_CHILD_CREATED, NULL);
+    lv_obj_send_event(parent, LV_EVENT_CHILD_CREATED, obj);
 
     lv_obj_mark_layout_as_dirty(obj);
 
@@ -226,7 +226,7 @@ void lv_obj_move_to_index(lv_obj_t * obj, int32_t index)
     }
 
     parent->spec_attr->children[index] = obj;
-    lv_obj_send_event(parent, LV_EVENT_CHILD_CHANGED, NULL);
+    lv_obj_send_event(parent, LV_EVENT_CHILD_CHANGED, obj);
     lv_obj_invalidate(parent);
 }
 
